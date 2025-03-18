@@ -10,7 +10,7 @@ public class LoginTests {
 
     @Test
     void successfulLoginTest() {
-//        Configuration.holdBrowserOpen = true;
+
         open("https://qa.guru/cms/system/login");
         $(".login-form").shouldHave(text("Войти"));
         $("[name=email]").setValue("houseoftales@mail.ru");
