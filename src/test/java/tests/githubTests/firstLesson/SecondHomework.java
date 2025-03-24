@@ -1,4 +1,4 @@
-package github.firstLessonSelenide;
+package tests.githubTests.firstLesson;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;

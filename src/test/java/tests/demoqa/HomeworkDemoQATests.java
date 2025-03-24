@@ -1,15 +1,16 @@
-package demoqa;
+package tests.demoqa;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class HomeworkDemoQATests {
+public class HomeworkDemoQATests extends TestBase {
 
     @BeforeAll
     static void beforeAll() {
@@ -18,23 +19,18 @@ public class HomeworkDemoQATests {
         Configuration.pageLoadTimeout = 50000;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.holdBrowserOpen = true;
-        Configuration.browser = "chrome";
+        Configuration.browser = "firefox";
     }
 
     @Test
     public void testBoxTest() {
-        open("/automation-practice-form");
-
-        String firstName = "Ivan";
-        String lastName = "Ivanov";
-        String userEmail = "ivankov@mail.ru";
-        String number = "1234567890";
-
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue(userEmail);
-        $x("//div[@id='genterWrapper']//input[@value='Male']//following-sibling::label").click();
-        $("#userNumber").setValue(number);
+        demoqaPage
+                .openPage("/automation-practice-form", "Student Registration Form")
+                .setFirstName("Ivan")
+                .setLastName("Ivankov")
+                .setUserEmail("ivankov@mail.ru")
+                .setUserNumber("1234567890")
+                .selectGender("Female");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOptionByValue("2001");
         $(".react-datepicker__month-select").selectOptionByValue("10");

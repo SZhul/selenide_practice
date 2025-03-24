@@ -1,4 +1,4 @@
-package github.firstLessonSelenide;
+package tests.githubTests.secondLesson;
 
 import org.junit.jupiter.api.Test;
 

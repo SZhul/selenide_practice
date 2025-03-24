@@ -1,4 +1,4 @@
-package firstLesson;
+package tests.FirstLesson;
 
 import org.junit.jupiter.api.Test;
 
