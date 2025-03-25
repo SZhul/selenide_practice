@@ -12,7 +12,7 @@ public class TestBase {
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.pageLoadTimeout = 50000;
+        Configuration.pageLoadTimeout = 100000;
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.holdBrowserOpen = true;
         Configuration.browser = "firefox";
