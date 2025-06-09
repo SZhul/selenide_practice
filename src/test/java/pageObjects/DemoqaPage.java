@@ -28,6 +28,7 @@ public class DemoqaPage implements RegistrationResultsModal {
             subjectInput = $("#subjectsInput"),
             submitButton = $("#submit");
 
+
     public DemoqaPage openPage(String endpoint, String h1) {
         open(endpoint);
         $(".practice-form-wrapper").shouldHave(text(h1));
