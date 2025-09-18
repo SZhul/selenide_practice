@@ -2,28 +2,27 @@ package tests.demoqa;
 
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 
 
 public class TestBoxWithRemoteDriverTest {
 
     @BeforeAll
-    static void beforeAll() throws MalformedURLException {
+    static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
         Configuration.pageLoadTimeout = 100000;
@@ -41,6 +40,12 @@ public class TestBoxWithRemoteDriverTest {
         Configuration.browserCapabilities = capabilities;
     }
 
+    @BeforeEach
+    void addListener() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
+    }
+
     @Test
     @Tag("remote")
     public void testBoxTest() {
@@ -49,7 +54,7 @@ public class TestBoxWithRemoteDriverTest {
         String currentAddress = "Egypt";
         String permanentAddress = "Russia";
 
-        open("/text-box");
+        step("Открыть страницу", () -> open("/text-box"));
         $(".text-center").shouldHave(text("Text Box"));
         $("#userName").setValue(username);
         $("#userEmail").setValue(email);
@@ -62,6 +67,7 @@ public class TestBoxWithRemoteDriverTest {
         $("#output #name").shouldHave(text(username));
         $("#output #email").shouldHave(text(email));
         $("#output #currentAddress").shouldHave(text(currentAddress));
-        $("#output #permanentAddress").shouldHave(text(permanentAddress));
+        step("Проверить адрес", () -> $("#output #permanentAddress").shouldHave(text(permanentAddress)));
+//        $("#output #permanentAddress").shouldHave(text(permanentAddress));
     }
 }
