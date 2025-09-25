@@ -36,4 +36,10 @@ public class SystemPropertiesTests {
         // gradle clean one_property_test -DbrowserName=firefox
         // gradle clean one_property_test -DbrowserName="opera_headless" если два слова, берем в кавычках
     }
+
+    @Test
+    @Tag("hello")
+    void simplePropertyTest4() {
+        System.out.println("Hello, " + System.getProperty("user_name", "unknown"));
+    }
 }
