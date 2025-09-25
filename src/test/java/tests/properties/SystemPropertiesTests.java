@@ -29,6 +29,7 @@ public class SystemPropertiesTests {
     @Test
     @Tag("oneProperty")
     void simplePropertyTest3() {
+        System.out.println(System.getProperty("browserName"));
         String browserName = System.getProperty("browserName", "firefox");
         System.out.println(browserName);
         // gradle clean one_property_test
