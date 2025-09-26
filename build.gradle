@@ -47,14 +47,44 @@ test {
     systemProperties(System.getProperties())
 }
 
+tasks.withType(Test) {
+    useJUnitPlatform()
+    systemProperties(System.getProperties())
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+
+task onePropertyTest(type: Test) {
+    useJUnitPlatform {
+        includeTags("oneProperty")
+    }
+}
+
 task simple_test(type: Test) {
     useJUnitPlatform {
         includeTags("simple")
     }
+}
+
+task hello_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("hello")
+    }
+}
 
 task remote_test(type: Test) {
-        useJUnitPlatform {
-            includeTags("remote")
-        }
+    useJUnitPlatform {
+        includeTags("remote")
+    }
+}
+
+task homework_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("Homework")
     }
 }
