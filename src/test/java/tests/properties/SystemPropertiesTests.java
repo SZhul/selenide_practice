@@ -42,4 +42,12 @@ public class SystemPropertiesTests {
     void simplePropertyTest4() {
         System.out.println("Hello, " + System.getProperty("user_name", "unknown"));
     }
+
+    @Test
+    @Tag("Homework")
+    void simplePropertyTest5() {
+        System.setProperty("browserSize", "1920x1080");
+        open("https://github.com/");
+        System.out.println(System.getProperty("browserSize"));
+    }
 }
