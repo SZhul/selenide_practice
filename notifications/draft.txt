@@ -1,0 +1,26 @@
+Telegram username: @foko_notify_bot
+Telegram token: 7818373931:AAH77z7WHCNl_SjhG7iULhVT4vfWsa2xLIw
+Chat id: 40939229
+
+a. Fetch bot updates and look for the chat id:
+curl -s "https://api.telegram.org/bot${BOT_TOKEN}/getUpdates" | jq .message.chat.id
+curl -s "https://api.telegram.org/bot7818373931:AAH77z7WHCNl_SjhG7iULhVT4vfWsa2xLIw/getUpdates" | jq.message.chat.id
+curl https://api.telegram.org/bot7818373931:AAH77z7WHCNl_SjhG7iULhVT4vfWsa2xLIw/getUpdates | -r '.result[].message.chat.id'
+curl https://api.telegram.org/bot7818373931:AAH77z7WHCNl_SjhG7iULhVT4vfWsa2xLIw/getUpdates | jq -r '.result[].message.chat.id'
+
+b. Send a message to the bot:
+
+$headers = @{
+    "Content-Type" = "application/json"
+}
+
+$body = @{
+    "chat_id" = 40939229
+    "text" = "Hello!"
+    "disable_notification" = $true
+} | ConvertTo-Json
+
+$response = Invoke-WebRequest -Uri "https://api.telegram.org/bot7818373931:AAH77z7WHCNl_SjhG7iULhVT4vfWsa2xLIw/sendMessage" -Method Post -Headers $headers -Body $body
+
+c. Run jar with notifications:
+java "-DconfigFile=notifications/config.json" -jar notifications/allure-notifications-4.11.0.jar
